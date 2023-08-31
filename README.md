@@ -13,4 +13,4 @@ The workshop slides can be found [here](./introduction-to-git.pdf).
 
 ## Worksheet
 
-The workshop interactive session worksheets are available here soon.
+The workshop interactive session worksheets are available [here](./git-workshop.md).
