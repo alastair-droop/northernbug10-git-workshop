@@ -2,6 +2,9 @@
 
 This worksheet provides a slightly simplified view of how git is used "in real life".
 
+> **NB**: This is a brief overview of a very complex topic.
+> For a further (and more in-depth) lesson, please look at the [Version Control with Git](https://swcarpentry.github.io/git-novice/) lesson on Software Carpentry.
+
 ## 0. Prerequisites
 
 Before you start, you should have the following things set up:
