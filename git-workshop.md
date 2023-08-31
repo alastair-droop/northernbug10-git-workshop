@@ -140,7 +140,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 > This is telling us that there is a new file in the workspace (`random-reads`) but that it has not yet been added to the index.
 
-## Make our first commit
+## 4. Make our first commit
 
 We now need to commit this new file to the index, and commit it to our repository.
 The first step is to add it to the index:
@@ -181,10 +181,9 @@ Date:   Thu Aug 31 14:43:35 2023 +0100
 
 > Your log will look different.
 > Your commit will have a different ID, and your username should be different to this one!
-> 
 > This is the "standard loop" of git: generate content; fill up an index of modified files; commit those changes to the repository.
 
-## Let's test the repository
+## 5. Let's test the repository
 
 One use of git is as a method of backup.
 Let's test this by deleting the `random-reads` file.
@@ -224,7 +223,7 @@ random-reads*
 > Great! We've got our code back again.
 > This is a major benefit of `git`.
 
-## Adding a feature
+## 6. Adding a feature
 
 Now, we need to update our random-reads code to allow us to alter the length of the reads returned.
 We'll do this in a new branch in case our modifications break something.
@@ -303,3 +302,128 @@ Fast-forward
 ~~~
 
 > OK, we've now merged the `specify-readlength` code back into our main branch. We're back in the main branch but our code has been updated.
+
+## 7. Create a Github Repository
+
+Now that we have an active local repository, we need to get it uploaded to a remote repository for safekeeping and security.
+We will do this using [GitHub](https://www.github.com).
+
+* Log into your Github account, and click on the "New" button (or go directly to [https://github.com/new](https://github.com/new)).
+* You should be greeted by the "Create a new repository" page.
+* Choose a sensible name for your repository (for example "random-reads").
+* Add a brief description of the repository to help you remember what it contains.
+* Select "Private" to make your repository private.
+* For now, leave the "Add a README file" unticked, and select "None" for the `.gitignore` and license options.
+* Click the "Create repository" button at the bottom.
+
+Once you've done this, your new repository will be created.
+Currently there is nothing in this repo.
+SO, we need to push the contents of our local repository to this remote one.
+For this to happen, we need to link this new remote repository the local repository.
+We do this using the Github repository URL.
+
+* Write down or copy the remote repository URL. It will be located in the "Quick Setup" section of the remote repository page.
+
+Now that we have the remote repository created and have its URL, we can link it to the local repository.
+We will give the remote repository a name to identify it.
+By default, the main remote repository is called `origin`.
+You could use whatever name you wanted though.
+
+Link the local repository to the new remote repository:
+
+~~~console
+git remote add origin git@github.com:alastair-droop/random-reads.git
+~~~
+
+> **NB**: You will have a different URL, as this repository is private to me.
+
+## 8. Push the local repository to GitHub
+
+Now that the local repository is linked to a remote location, we can push it to the cloud:
+
+~~~console
+$ git push -u origin main
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 1.35 KiB | 1.35 MiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To github.com:alastair-droop/random-reads.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+~~~
+
+Congratulations! You've just pushed your local repository to GitHub!
+If you go back to the GitHub and refresh the repository page, you should see that your code has been uploaded.
+
+## 9. Adding a README file
+
+Currently, the repository is not very well documented.
+By convention, a file named `README` or `README.md` in the root of your workspace is taken to contain a description of the project.
+If such a file exists, GitHub will display it on the main repository page.
+Let's create such a file for our repository.
+
+Go back to your text editor, and create a second file called `README.md` in the workspace folder.
+
+Add the following text to the file:
+
+```markdown
+# Generate Random FASTQ Reads
+
+The `random-reads` python script generates random nucleotide FASTQ data.
+
+## Usage
+
+~~~python
+usage: random-reads [-h] [-V] [-v {error,warning,info,debug}] [-l N] N
+
+Generate random FASTQ data
+
+positional arguments:
+  N                     Number of reads to generate
+
+options:
+  -h, --help            show this help message and exit
+  -V, --version         show program's version number and exit
+  -v {error,warning,info,debug}, --verbose {error,warning,info,debug}
+                        Set logging level (default warning
+  -l N, --length N      Read length to yield
+~~~
+```
+
+As we've added a file, we need to make a new commit:
+
+~~~console
+$ git add README.md
+$ git commit -m"Add README file"
+[main d75b82e] Add README file
+ 1 file changed, 21 insertions(+)
+ create mode 100644 README.md
+~~~
+
+We can now push this new commit to GitHub:
+
+~~~console
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 598 bytes | 598.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:alastair-droop/random-reads.git
+   a2fe48f..d75b82e  main -> main
+~~~
+
+> We didn't need to specify a branch or remote name, as git will use the current branch and the only remote (as there is only one).
+
+Go back to Github and refresh the page again.
+Hopefully, you'll see the new README documentation appear.
+
+## 10. Markdown
+
+> The `README.md` file we've just created uses a format called Markdown.
+> This is a very simple text file format that allows a computer to render our text nicely.
+> You can dig into the format by reading the [documentation on GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/about-writing-and-formatting-on-github).
